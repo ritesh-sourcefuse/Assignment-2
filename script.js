@@ -6,26 +6,25 @@ const originalUsers = [
   { first: "Aniket", middle: "R", last: "Sharam", email: "ani@gmail.com", phone: "9988776655", role: "Developer", address: "Una" }
 ];
 
-
 let users = [];
-
 
 const loadBtn = document.getElementById('loadBtn');
 const table = document.getElementById('userTable');
 const tbody = table.querySelector('tbody');
 
-
 const clone = obj => JSON.parse(JSON.stringify(obj));
 
 // added the event listener
 loadBtn.addEventListener('click', () => {
+
+  console.log("Load button clicked - PR update");   // <-- Added for PR
+
   users = clone(originalUsers);      // reload original data
   users.forEach(u => u._editingBackup = null); // clear editing backups
   renderTable();
   table.style.display = 'table';
   loadBtn.textContent = 'Refresh data';
 });
-
 
 const renderTable = () => {
   tbody.innerHTML = '';
@@ -48,11 +47,12 @@ const renderTable = () => {
           <button class="cancel">Cancel</button>
         </td>
       `;
-      
+
       tr.querySelector('.save').addEventListener('click', () => saveRow(index, tr));
       tr.querySelector('.cancel').addEventListener('click', () => cancelEdit(index));
+
     } else {
-     
+
       tr.innerHTML = `
         <td>${(user.first)}</td>
         <td>${(user.middle)}</td>
@@ -66,6 +66,7 @@ const renderTable = () => {
           <button class="delete">Delete</button>
         </td>
       `;
+
       tr.querySelector('.edit').addEventListener('click', () => startEdit(index));
       tr.querySelector('.delete').addEventListener('click', () => deleteRow(index));
     }
@@ -73,7 +74,6 @@ const renderTable = () => {
     tbody.appendChild(tr);
   });
 };
-
 
 const startEdit = i => {
   users[i]._editingBackup = clone(users[i]);  // backup copy
@@ -90,7 +90,6 @@ const cancelEdit = i => {
   renderTable();
 };
 
-
 const saveRow = (i, tr) => {
   const inputs = tr.querySelectorAll('input[data-field]');
   inputs.forEach(input => {
@@ -103,16 +102,11 @@ const saveRow = (i, tr) => {
 };
 
 // delete user from table
-
 const deleteRow = i => {
   if (confirm('Delete this user?')) {
-
-  
-  users.splice(i, 1);
-  renderTable();
-  }
-  else{
+    users.splice(i, 1);
+    renderTable();
+  } else {
     return;
   }
 };
-
