@@ -1,6 +1,7 @@
+// Assignment 2 - CRUD Table Script
 
 const originalUsers = [
-  { first: "Ritesh", middle: "", last: "Thakur", email: "ritesh@gmail.com", phone: "9876543210", role: "Data Scientist", address: "Himachal Pardesh" },
+  { first: "Ritesh", middle: "", last: "Thakur", email: "ritesh@gmail.com", phone: "9876543210", role: "Data Scientist", address: "Himachal Pradesh" },
   { first: "Rohit", middle: "", last: "Sharma", email: "rohit123@gmail.com", phone: "9123456780", role: "QA", address: "Mumbai" },
   { first: "Aniket", middle: "R", last: "Sharam", email: "ani@gmail.com", phone: "9988776655", role: "Developer", address: "Una" }
 ];
@@ -101,6 +102,7 @@ const saveRow = (i, tr) => {
   renderTable();
 };
 
+// delete user from table
 
 const deleteRow = i => {
   if (confirm('Delete this user?')) {
